@@ -15,7 +15,6 @@ use MoonShine\Crud\Buttons\DeleteButton;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\MenuManager\Attributes\Group;
 use MoonShine\MenuManager\Attributes\Order;
-use Illuminate\Http\Request;
 use MoonShine\Support\Attributes\Icon;
 use MoonShine\Support\Attributes\AsyncMethod;
 use MoonShine\Support\Enums\Action;
@@ -27,6 +26,7 @@ use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
+use MoonShine\Contracts\Core\DependencyInjection\CrudRequestContract;
 
 #[Icon('view-columns')]
 #[Group('Kanban', 'squares-2x2')]
@@ -79,7 +79,7 @@ class TaskResource extends KanBanResource
     }
 
     #[AsyncMethod]
-    public function sort(Request $request): Response
+    public function sort(CrudRequestContract $request): Response
     {
         $model = $this->getModel();
         $keyName = $model->getKeyName();
